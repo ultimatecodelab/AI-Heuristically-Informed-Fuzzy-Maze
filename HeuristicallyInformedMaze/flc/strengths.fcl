@@ -1,0 +1,49 @@
+FUNCTION_BLOCK strengths
+
+	VAR_INPUT 
+			weapon : REAL; 		// mine(player's) weapon
+			lifeOfMe : REAL;	// mine(player's) life
+			lifeOfOp : REAL;   	// opponent's life
+	END_VAR
+	
+	VAR_OUTPUT 
+			victory : REAL;  	// possibility of vitory for me(player)
+	END_VAR
+	
+	FUZZIFY weapon
+			TERM hydrogenBomb := (60, 0) (100, 1);
+			TERM bomb := trian 30 50 70;
+			TERM sword := (0, 1) (40, 0);
+	END_FUZZIFY
+	
+	FUZZIFY lifeOfMe
+			TERM low := (0, 1) (20, 1) (40, 0);
+			TERM mid := trian 40 60 70;
+			TERM high := (60, 0) (80, 1) (100, 1);
+	END_FUZZIFY
+	
+	FUZZIFY lifeOfOp
+			TERM low := (0, 1) (20, 1) (40, 0);
+			TERM mid := trian 40 60 70;
+			TERM high := (60, 0) (80, 1) (100, 1);
+	END_FUZZIFY
+	
+	DEFUZZIFY victory
+			TERM low := (0, 1) (45, 0);
+			TERM normal := trian 40.0 70.0 80.0; 
+			TERM high := (60, 0) (100, 1); 
+			METHOD : COG;
+			DEFAULT := 0;
+	END_DEFUZZIFY
+	
+	RULEBLOCK No1
+			AND : MIN;
+			ACT : MIN;
+			ACCU : MAX;
+			RULE 1 : IF weapon IS hydrogenBomb THEN victory IS high;
+			RULE 2 : IF weapon IS bomb OR lifeOfMe IS NOT low THEN victory IS normal;
+			RULE 3 : IF weapon IS sword OR lifeOfOp IS high THEN victory IS low;
+			RULE 4 : IF weapon IS NOT hydrogenBomb AND lifeOfMe IS low THEN victory IS low;
+	END_RULEBLOCK
+
+END_FUNCTION_BLOCK
