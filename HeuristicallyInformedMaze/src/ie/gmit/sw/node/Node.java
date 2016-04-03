@@ -18,6 +18,12 @@ public class Node {
 		this.row = row;
 		this.col = col;
 	}
+	public void setRow(int row){
+		this.row = row;
+	}
+	public void setCol(int col){
+		this.col = col;
+	}
 	public NodeType getNodeType() {
 		return nodeType;
 	}

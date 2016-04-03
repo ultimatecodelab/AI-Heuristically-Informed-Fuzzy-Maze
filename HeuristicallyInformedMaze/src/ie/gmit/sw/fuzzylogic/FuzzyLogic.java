@@ -9,13 +9,13 @@ import net.sourceforge.jFuzzyLogic.FunctionBlock;
 
 public class FuzzyLogic {
 
-	public boolean fight(Weapon weapon, Player me, Enemy opponent) {
+	public double fight(Weapon weapon, Player me, Enemy opponent) {
 		String fileName = "flc/strengths.fcl";
 		FIS fis = FIS.load(fileName, true);
 
 		if (fis == null) {
 			System.err.println("Can't load file: '" + fileName + "'");
-			return false;
+			//return false;
 		}
 
 		FunctionBlock functionBlock = fis.getFunctionBlock("strengths");
@@ -28,18 +28,18 @@ public class FuzzyLogic {
 		fis.evaluate();
 
 		Double victory = fis.getVariable("victory").getValue();
-		if (victory < 50) {
-			me.decrementPlayerHealth(me.myLifeForce() * victory / 100);
-		}
+		
+		 me.decrementPlayerHealth(me.myLifeForce() * victory / 100);
+		
 		// fis.evaluate();
 		System.out.println("Value: " + victory);
 		System.out.println(me.myLifeForce() + " my total strength...");
 		if (me.myLifeForce() <= 0) {
 			MessageBox.info("Sorry you died :(", "Fuzzy Logic");
 			System.exit(0); // exit the game...
-			return false;
+			//return victory;
 		}
-		return true;
+		return victory;
 
 		// Show output variable's chart
 		/*

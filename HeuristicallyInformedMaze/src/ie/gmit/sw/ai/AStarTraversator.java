@@ -18,12 +18,9 @@ public class AStarTraversator {
 	}
 
 	public void traverse(Node[][] maze, Node node) {
-		
-		if(node.getNodeType()==NodeType.PlayerNode){
-			targetNode =  NodeType.ExitPoint;
-		}
 		setParentsNull(maze);
-		targetNode = node.getNodeType();
+		System.out.println("Target Node is: " + targetNode);
+	
 		long time = System.currentTimeMillis();
 		int visitCount = 0;
 
@@ -40,7 +37,7 @@ public class AStarTraversator {
 			node.setVisited(true);
 			visitCount++;
 
-			if (node.getNodeType() == NodeType.ExitPoint) {
+			if (node.getNodeType() ==NodeType.ExitPoint) {
 				time = System.currentTimeMillis() - time; // Stop the clock
 				System.out.println("goal found...");
 				foundGoal = true;

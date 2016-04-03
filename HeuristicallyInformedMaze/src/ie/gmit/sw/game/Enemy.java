@@ -3,7 +3,9 @@ package ie.gmit.sw.game;
 import java.util.List;
 import java.util.Random;
 
+import ie.gmit.sw.ai.AStarTraversator;
 import ie.gmit.sw.ai.DepthLimitedDFSTraversator;
+import ie.gmit.sw.ai.TraversatorStats;
 import ie.gmit.sw.node.Node;
 import ie.gmit.sw.node.NodeType;
 
@@ -14,6 +16,8 @@ public class Enemy implements Runnable {
 	private int row;
 	private int col;
 	private int enemyStrength = 100;
+	private Node targetNode;
+	private boolean isIntelligent = false;
 
 	public int getLifeForce() {
 		return enemyStrength;
@@ -34,8 +38,10 @@ public class Enemy implements Runnable {
 
 	}
 
-	public Enemy(Node[][] maze, Node targetNode) throws InterruptedException {
+	public Enemy(Node[][] maze, Node targetNode, boolean isIntelligent) throws InterruptedException {
 		this.maze = maze;
+		this.targetNode = targetNode;
+		this.isIntelligent = isIntelligent;
 		setXandY();
 	}
 
@@ -65,18 +71,26 @@ public class Enemy implements Runnable {
 		return col;
 	}
 
+	private void computeHeuristicsPaths() throws InterruptedException {
+		System.out.println("computing heuristics....");
+		AStarTraversator tr = new AStarTraversator(targetNode);
+		tr.traverse(maze, maze[this.getRow()][this.getCol()]);
+		paths = TraversatorStats.getPaths();
+		System.out.println("enemies path list size is: " + paths.size());
+
+	}
+
 	private void computePaths() throws InterruptedException {
 
 		DepthLimitedDFSTraversator tr = new DepthLimitedDFSTraversator(200, this);
 		tr.traverse(maze, maze[this.getRow()][this.getCol()]);
-
 	}
 
 	private void updatePath() {
 		for (int k = 0; k < this.paths.size(); k++) {
 			try {
 				updatePath(this.getComputedPaths().get(k).getRow(), this.getComputedPaths().get(k).getCol());
-				Thread.sleep(1500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
@@ -91,7 +105,8 @@ public class Enemy implements Runnable {
 	@Override
 	public void run() {
 		try {
-			computePaths();
+			if (!isIntelligent)
+				computePaths();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -10,7 +10,15 @@ public class Player {
 	private static int playerHealth = 100;
 	private int INITIAL_COUNT = 0;
 	private List<Weapon> myWeapons = new ArrayList<>();
-
+	
+	private static int myExploredNodes = 0;
+	
+	public static void incrementExploredMoves (){
+		myExploredNodes++;
+	}
+	public static int getExploredMoves(){
+		return myExploredNodes;
+	}
 	public Player() {
 		intWeaponsCountWithZeros();
 	}
@@ -52,7 +60,7 @@ public class Player {
 	}
 
 	public void intWeaponsCountWithZeros() {
-		myWeapons.add(new Weapon(NodeType.HydrogenBombNode, 100, INITIAL_COUNT));
+		myWeapons.add(new Weapon(NodeType.HydrogenBombNode, 99, INITIAL_COUNT));
 		myWeapons.add(new Weapon(NodeType.BombNode, 70, INITIAL_COUNT));
 		myWeapons.add(new Weapon(NodeType.SwordNode, 40, INITIAL_COUNT));
 		System.out.println("the size of weapon list is: " + myWeapons.size());

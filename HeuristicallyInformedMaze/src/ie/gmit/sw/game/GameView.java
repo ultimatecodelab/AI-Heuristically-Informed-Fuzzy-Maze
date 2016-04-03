@@ -116,7 +116,7 @@ public class GameView extends JPanel implements ActionListener {
 						continue;
 					}
 
-				} else {
+				} else if(maze[currentRow - cellpadding + row][currentCol - cellpadding + col].getNodeType()!=null) {
 					nodeType = maze[currentRow - cellpadding + row][currentCol - cellpadding + col].getNodeType();
 				}
 

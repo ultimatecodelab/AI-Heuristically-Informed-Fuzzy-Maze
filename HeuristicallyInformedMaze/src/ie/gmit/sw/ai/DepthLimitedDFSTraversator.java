@@ -20,6 +20,7 @@ public class DepthLimitedDFSTraversator implements Traversator {
 	@Override
 	public void traverse(Node[][] maze, Node node) throws InterruptedException {
 		this.maze = maze;
+		//setParentsNull(maze);
 		dfs(node, 1);
 	}
 
@@ -46,14 +47,22 @@ public class DepthLimitedDFSTraversator implements Traversator {
 					enemyNode.updatePath(node.getRow(), node.getCol());
 					maze[node.getRow()][node.getCol()].setNodeType(NodeType.EnemyNode);
 					Thread.sleep(3000);
-				} /*else if (node.getRow() <= maze.length - 1 && node.getCol() <= maze[node.getRow()].length - 1
+				}else if (node.getRow() <= maze.length - 1 && node.getCol() <= maze[node.getRow()].length - 1
 						&& (maze[node.getRow()][node.getCol()].getNodeType() == NodeType.PlayerNode)) {
 					enemyNode.updatePath(node.getRow() - 1, node.getCol() - 1);
 					maze[node.getRow() - 1][node.getCol() - 1].setNodeType(NodeType.EnemyNode);
-					System.out.println("bammm..");
-				}*/
+					//System.out.println("bammm..");
+				}
 
 				dfs(children[i], depth + 1);
+			}
+		}
+	}
+	private void setParentsNull(Node[][] maze) {
+		for (int i = 0; i < maze.length; i++) {
+			for (int j = 0; j < maze[i].length; j++) {
+				maze[i][j].setVisited(false);
+				maze[i][j].setParent(null);
 			}
 		}
 	}
