@@ -12,9 +12,10 @@ A Heuristically Informed Fuzzy Maze Challenge
 
 3: On the left side of the GUI, all the stats has been displayed.  It will tell you how far the (exit point  / Goal node is) and it is calculated based on the player movement.
 
-4 : fuzzy logic has been implemented. When player collides with an enemy, fight fight is invoked and random weapon is choosen from the player weapon list. 
+4 : Fuzzy logic has been implemented. When player collides with an enemy, fight fight is invoked and random weapon is choosen from the player weapon list. 
 
-5: fuzzy logic victory is shown in the left panel of the game. It will be shown once you hit an enemy.
+5: Fuzzy logic victory is shown in the left panel of the game. It will be shown once you collide with an enemy.
+
 
 ###Controls: 
 Up arrow
