@@ -29,8 +29,17 @@ Right Arrow
 z to zoom out ( please move the player while you are zoomed out, you will be able to see the path being dynamically generated as you move through the maze.
 
 ###How to run ?
+1: Clone the project from the above link
 
-Clone the project using the above url
+2: Unzip MazeGame.zip
+
+    - resources folder (contains resources)
+    - mazegame.jar
+    
+execute **java -cp "./mazegame.jar;lib/*" ie.gmit.sw.game.GameRunner**
+
+
+You can also import the project to eclipse and run it.
 
 import the project (HeuristicallyInformedMaze) in eclipse, please ensure the fuzzy logic library  is added in the build path.
 
