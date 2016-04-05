@@ -62,3 +62,4 @@ ie.gmit.sw.traversers
 ie.gmit.sw.sound
   - Sound.java
   - SoundEffect.java
+![Alt text](https://github.com/ultimatecodelab/AI-Heuristically-Informed-Fuzzy-Maze/blob/master/maze.PNG "Optional title")
