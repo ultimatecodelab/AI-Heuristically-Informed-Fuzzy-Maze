@@ -1,8 +1,8 @@
 FUNCTION_BLOCK strengths
 
 	VAR_INPUT 
-			weapon : REAL; 		// mine(player's) weapon
-			lifeOfMe : REAL;	// mine(player's) life
+			weapon : REAL; 		// Player weapon
+			lifeOfMe : REAL;	// Player life
 			lifeOfOp : REAL;   	// opponent's life
 	END_VAR
 	
