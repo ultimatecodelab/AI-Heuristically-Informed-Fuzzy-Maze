@@ -213,7 +213,7 @@ public class GameRunner implements KeyListener {
 		lblFuzzyLogicVictory.setBounds(10, 479, 150, 14);
 		panel.add(lblFuzzyLogicVictory);
 
-		labelFuzzy = new JLabel("No enemy encountered yet");
+		labelFuzzy = new JLabel("No enemy encountered ");
 		labelFuzzy.setBounds(10, 504, 171, 14);
 		panel.add(labelFuzzy);
 
@@ -247,20 +247,12 @@ public class GameRunner implements KeyListener {
 		for (int i = 0; i < nEnemies; i++) {
 			ex.execute(new Enemy(model, player));
 		}
-		/*ex.execute(new Enemy(model, player, true));
-		ex.execute(new Enemy(model, player, true));
-		ex.execute(new Enemy(model, player, true));*/
-		
 	}
 
 	private void constantPathUpdate() {
 		goal = m.getGoalNode();
-		System.out.println(goal.getRow() + " : " + goal.getCol());
+		System.out.println("Goal node at: " + goal.getRow() + " : " + goal.getCol());
 		AStarTraversator update = new AStarTraversator(goal);
-		//BestFirstTraversator update = new BestFirstTraversator(goal);
-		System.out.println(model.length + " is model.");
-		System.out.println("Current row is: " + currentRow);
-		System.out.println("Current col is: " + currentCol);
 		update.traverse(model, model[currentRow][currentCol]);
 		updateGUI(update);
 
@@ -276,10 +268,8 @@ public class GameRunner implements KeyListener {
 			goal.setNodeType(NodeType.WalkableNode);
 			goal = m.getGoalNode();
 			System.out.println("recalculating the path...");
-			//BestFirstTraversator playerPath= new BestFirstTraversator(goal);
 			Traversator playerPath = new AStarTraversator(goal);
 			playerPath.traverse(model, model[player.getRow()][player.getCol()]);
-			
 			System.out.println("finished calculating...");
 			checker = (int) TraversatorStats.depth;
 			if (checker > 20) {
@@ -373,10 +363,10 @@ public class GameRunner implements KeyListener {
 		if (r <= model.length - 1 && c <= model[r].length - 1 && (model[r][c].getNodeType() == NodeType.WalkableNode)
 				|| model[r][c].getNodeType() == NodeType.PathNode || model[r][c].getNodeType() == NodeType.BombNode
 				|| model[r][c].getNodeType() == NodeType.HydrogenBombNode
-				|| model[r][c].getNodeType() == NodeType.SwordNode || model[r][c].getNodeType() == NodeType.HelpNode
+				
 				|| model[r][c].getNodeType() == NodeType.ExitPoint) {
 
-			if (model[r][c].getNodeType() != NodeType.WalkableNode && model[r][c].getNodeType() != NodeType.HelpNode) {
+			if (model[r][c].getNodeType() != NodeType.WalkableNode) {
 				playerStuffs.addWeaponCount(model[r][c].getNodeType());
 				ie.gmit.sw.sound.SoundEffects.MOVE.play();
 			}
@@ -384,9 +374,7 @@ public class GameRunner implements KeyListener {
 				MessageBox.info("Congrats,You have escapped in " + Player.getExploredMoves() + " moves");
 				System.exit(0); // exit the game...
 			}
-			if (model[r][c].getNodeType() == NodeType.HelpNode) {
-				model[r][c].setNodeType(NodeType.WalkableNode);
-			}
+			
 			if (model[r][c].getNodeType() == NodeType.EnemyNode) {
 				model[r][c].setNodeType(NodeType.WalkableNode);
 				

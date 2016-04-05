@@ -109,11 +109,6 @@ public class GameView extends JPanel implements ActionListener {
 						g2.drawString("Bomb", x1, y1);
 						continue;
 					}
-					if (nodeType == NodeType.HelpNode) {
-						g2.setColor(Color.BLACK);
-						g2.drawString("Help", x1, y1);
-						continue;
-					}
 
 				} else if(maze[currentRow - cellpadding + row][currentCol - cellpadding + col].getNodeType()!=null) {
 					nodeType = maze[currentRow - cellpadding + row][currentCol - cellpadding + col].getNodeType();
@@ -123,8 +118,6 @@ public class GameView extends JPanel implements ActionListener {
 					imageIndex = 0;
 				} else if (nodeType == NodeType.SwordNode) {
 					imageIndex = 1;
-				} else if (nodeType == NodeType.HelpNode) {
-					imageIndex = 2;
 				} else if (nodeType == NodeType.BombNode) {
 					imageIndex = 3;
 				} else if (nodeType == NodeType.HydrogenBombNode) {

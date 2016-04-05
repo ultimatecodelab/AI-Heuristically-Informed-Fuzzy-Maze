@@ -52,7 +52,6 @@ public class Maze {
 		
 		int featureNumber = (int) ((rows * cols) * 0.01);
 		addFeature(NodeType.SwordNode, NodeType.WallNode, featureNumber);
-		addFeature(NodeType.HelpNode, NodeType.WallNode, featureNumber);
 		addFeature(NodeType.HydrogenBombNode, NodeType.WallNode, featureNumber);
 		addFeature(NodeType.BombNode, NodeType.WallNode, featureNumber);
 	}

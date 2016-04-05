@@ -42,11 +42,9 @@ public class AStarTraversator implements Traversator {
 
 			if (node.getNodeType() == NodeType.ExitPoint) {
 				time = System.currentTimeMillis() - time; // Stop the clock
-				System.out.println("goal found...");
 				foundGoal = true;
 				TraversatorStats.printStats(node, time, visitCount);
 				howManyMovesAway = (int) TraversatorStats.depth;
-				System.out.println("Goal node found...");
 				break;
 			}
 			// Process adjacent nodes
