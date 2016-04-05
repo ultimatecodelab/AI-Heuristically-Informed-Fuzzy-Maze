@@ -353,7 +353,6 @@ public class GameRunner implements KeyListener {
 
 	public void fight(Player player, Enemy opponent) {
 		FuzzyLogic f = new FuzzyLogic();
-
 		labelFuzzy.setText(String.valueOf(f.fight(player.randomlyPickedWeapon(), player, opponent)));
 		this.nEnemies--;
 		if (player.myLifeForce() <= 0) {

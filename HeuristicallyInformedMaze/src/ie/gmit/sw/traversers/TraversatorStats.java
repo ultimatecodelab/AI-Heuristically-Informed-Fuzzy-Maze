@@ -22,7 +22,6 @@ public class TraversatorStats {
 			
 			paths.add(node);
 			if (node != null  && node.getNodeType()!=NodeType.PlayerNode) {
-				//node.setNodeType(NodeType.WalkableNode);
 				node.setColor(Color.yellow);
 			}
 			depth++;
