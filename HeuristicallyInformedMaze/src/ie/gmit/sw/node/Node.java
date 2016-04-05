@@ -3,8 +3,8 @@ package ie.gmit.sw.node;
 import java.awt.Color;
 
 public class Node {
-	public enum Direction {North, South, East, West};
-	NodeType nodeType;
+	public enum Direction {North, South, East, West}; //directions
+	NodeType nodeType; //tile type
 	private Node parent;
 	private Color color = Color.BLACK;
 	private Direction[] paths = null;
@@ -77,26 +77,10 @@ public class Node {
 		if (col < maze[row].length - 1 && maze[row][col + 1].hasDirection(Direction.West)) children.add(maze[row][col + 1]); //Add East*/
 		
 		return children.toArray(new Node[children.size()]);
-		
-		
-		
-		
 	}
 	public int getCount(){
 		return count;
 	}
-
-	public Node[] adjacentNodes(Node[][] maze){
-		java.util.List<Node> adjacents = new java.util.ArrayList<Node>();
-		
-		if (row > 0) adjacents.add(maze[row - 1][col]); //Add North
-		if (row < maze.length - 1) adjacents.add(maze[row + 1][col]); //Add South
-		if (col > 0) adjacents.add(maze[row][col - 1]); //Add West
-		if (col < maze[row].length - 1) adjacents.add(maze[row][col + 1]); //Add East
-		
-		return adjacents.toArray(new Node[adjacents.size()]);
-	}
-	
 	public Direction[] getPaths() {
 		return paths;
 	}

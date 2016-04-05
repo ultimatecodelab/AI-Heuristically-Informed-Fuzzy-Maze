@@ -6,7 +6,10 @@ import ie.gmit.sw.game.Player;
 import ie.gmit.sw.game.Weapon;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.FunctionBlock;
-
+import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
+/*
+ * When player collides with an enemies, fight() method is called. please refer to fcl file for rules of the game.
+ */
 public class FuzzyLogic {
 
 	public double fight(Weapon weapon, Player me, Enemy opponent) {
@@ -19,7 +22,7 @@ public class FuzzyLogic {
 		}
 
 		FunctionBlock functionBlock = fis.getFunctionBlock("strengths");
-		// JFuzzyChart.get().chart(functionBlock);
+		//JFuzzyChart.get().chart(functionBlock);
 
 		System.out.println("Weapon strength is: " + weapon.getWeaponStrength());
 		fis.setVariable("weapon", weapon.getWeaponStrength());
@@ -35,7 +38,7 @@ public class FuzzyLogic {
 		System.out.println("Value: " + victory);
 		System.out.println(me.myLifeForce() + " my total strength...");
 		if (me.myLifeForce() <= 0) {
-			MessageBox.info("Sorry you died :(", "Fuzzy Logic");
+			MessageBox.info("Sorry you died :(,game will be closed now.", "Fuzzy Logic");
 			System.exit(0); // exit the game...
 			//return victory;
 		}

@@ -1,12 +1,14 @@
 package ie.gmit.sw.game;
 
 import ie.gmit.sw.node.NodeType;
-
+/*
+ * Weapon : Weapon class for setting up different properties of a weapon. 
+ */
 public class Weapon {
 	private NodeType weaponType;
 	private double weaponStrength;
 	private int weaponCount;
-
+	//constructor
 	public Weapon(NodeType weaponType, double weaponStrength, int weaponCount) {
 		setWeaponType(weaponType);
 		setWeaponStrength(weaponStrength);

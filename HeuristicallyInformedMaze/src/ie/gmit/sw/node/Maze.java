@@ -2,22 +2,14 @@ package ie.gmit.sw.node;
 
 import java.util.Random;
 
-import ie.gmit.sw.game.Player;
-
 public class Maze {
 	private int MAZE_DIMENSION = 70;
 	private int NUMBER_OF_EXIST_POINTS = 1;
 	private Node[][] maze = new Node[MAZE_DIMENSION][MAZE_DIMENSION];
 
 	private Node player;
-	private Player playerChar;
 	private Node goalNode;
-	private int row=0;
-	private int col=0;
-	
 	public Maze(int rows, int cols) {
-		this.row = rows;
-		this.col = cols;
 		this.MAZE_DIMENSION = rows;
 		
 		initMaze();
@@ -26,9 +18,9 @@ public class Maze {
 		setExitPoint();
 		buildPath();
 	}
-
+	//building the path. checking north,south,east,west or neighbouring nodes. If neighbouring nodes
+	//are walkable then we are adding the path.
 	private void buildPath() {
-
 		for (int row = 0; row < maze.length; row++) {
 			for (int col = 0; col < maze[row].length; col++) {
 				if (col < maze[row].length - 1) {
@@ -36,7 +28,6 @@ public class Maze {
 						maze[row][col].addPath(Node.Direction.West);
 					}
 				}
-
 				if (col > 0) {
 					if (maze[row][col - 1].getNodeType() == NodeType.WalkableNode) {
 						maze[row][col].addPath(Node.Direction.East);
@@ -56,7 +47,7 @@ public class Maze {
 		}
 
 	}
-
+	//populating the features
 	private void populateFeatures(int rows, int cols) {
 		
 		int featureNumber = (int) ((rows * cols) * 0.01);
@@ -65,7 +56,7 @@ public class Maze {
 		addFeature(NodeType.HydrogenBombNode, NodeType.WallNode, featureNumber);
 		addFeature(NodeType.BombNode, NodeType.WallNode, featureNumber);
 	}
-
+	//adding features
 	private void addFeature(NodeType feature, NodeType replace, int featureNumber) {
 		int counter = 0;
 		while (counter < featureNumber) {
@@ -78,7 +69,7 @@ public class Maze {
 			}
 		}
 	}
-
+	//init maze
 	private void initMaze() {
 		for (int row = 0; row < maze.length; row++) {
 			for (int col = 0; col < maze[row].length; col++) {
@@ -87,7 +78,7 @@ public class Maze {
 			}
 		}
 	}
-
+	//building maze
 	public void buildMaze() {
 		for (int row = 0; row < maze.length; row++) {
 			for (int col = 0; col < maze[row].length - 1; col++) {
@@ -108,7 +99,7 @@ public class Maze {
 	public Node getPlayer() {
 		return player;
 	}
-
+	//setting up player position and marking a node in a maze as a player node
 	public void setPlayer() {
 	    int currentRow = (int) ((MAZE_DIMENSION-20) * Math.random());
 		int currentCol = (int) ((MAZE_DIMENSION-20) * Math.random());
@@ -121,11 +112,11 @@ public class Maze {
 		System.out.println("player at: " + currentRow + " Col : " + currentCol);
 		player = maze[currentRow][currentCol];
 	}
-
+	//returning goal node
 	public Node getGoalNode() {
 		return goalNode;
 	}
-
+	//setting up the player exit point
 	public void setExitPoint() {
 		Random ran = new Random();
 		for (int i = 0; i < NUMBER_OF_EXIST_POINTS; i++) {

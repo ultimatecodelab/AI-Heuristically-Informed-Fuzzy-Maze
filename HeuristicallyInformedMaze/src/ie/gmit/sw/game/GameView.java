@@ -70,13 +70,12 @@ public class GameView extends JPanel implements ActionListener {
 			for (int col = 0; col < cellspan; col++) {
 				int x1 = col * size;
 				int y1 = row * size;
-				int x2 = (col + 1) * size;
-				int y2 = (row + 1) * size;
+				
 				NodeType nodeType = maze[row][col].getNodeType();
 
 				if (zoomOut) {
-					if (row == currentRow && col == currentCol) {
-						g2.setColor(Color.YELLOW);
+					if (nodeType==NodeType.PlayerNode) {
+						g2.setColor(Color.BLACK);
 						g2.fillRect(x1, y1, size, size);
 						g2.drawString("You are here.", x1, y1);
 						continue;
@@ -151,20 +150,16 @@ public class GameView extends JPanel implements ActionListener {
 					g2.drawImage(images[imageIndex], x1, y1, null);
 
 				} else {
-
-					g2.setColor(Color.LIGHT_GRAY);
-					g2.fillRect(x1, y1, size, size);
+					if (maze[row][col].isVisited() && !maze[row][col].isGoalNode()) {
+						g2.setColor(maze[row][col].getColor());
+						g2.fillRect(x1, y1, size, size);
+					}
+					else{
+						g2.setColor(Color.LIGHT_GRAY);
+						g2.fillRect(x1, y1, size, size);
+					}
 				}
-
-				/*
-				 * if (maze[row][col].isVisited() &&
-				 * !(maze[row][col].getNodeType()==NodeType.PlayerNode) &&
-				 * maze[row][col].getNodeType() == NodeType.WalkableNode) {
-				 * g2.setColor(maze[row][col].getColor());
-				 * 
-				 * g2.fillRect(x1, y1, size, size); }
-				 */
-
+				
 			}
 		}
 	}

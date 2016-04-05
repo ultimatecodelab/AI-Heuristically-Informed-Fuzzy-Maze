@@ -4,13 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import ie.gmit.sw.ai.AStarTraversator;
-import ie.gmit.sw.ai.TraversatorStats;
-
 import ie.gmit.sw.fuzzylogic.FuzzyLogic;
 import ie.gmit.sw.node.Maze;
 import ie.gmit.sw.node.Node;
 import ie.gmit.sw.node.NodeType;
+import ie.gmit.sw.traversers.AStarTraversator;
+import ie.gmit.sw.traversers.Traversator;
+import ie.gmit.sw.traversers.TraversatorStats;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -28,7 +29,7 @@ public class GameRunner implements KeyListener {
 	private Player playerStuffs = new Player();
 	private int nEnemies = 20; // enemies
 	ExecutorService ex = Executors.newCachedThreadPool();
-	AStarTraversator playerPath;
+	Traversator playerPath;
 
 	// panel
 	JPanel panel;
@@ -94,9 +95,6 @@ public class GameRunner implements KeyListener {
 		validatePath(); // validate path
 
 		spawnEnemies();// spawn enemies
-
-		constantPathUpdate();// constant path update
-		
 	}
 
 	private void guiElementsInit(JFrame f) {
@@ -148,14 +146,14 @@ public class GameRunner implements KeyListener {
 		lblSword_1.setBounds(10, 126, 46, 14);
 		panel.add(lblSword_1);
 
-		lblGoalNode = new JLabel("Goal Node  In : ");
+		lblGoalNode = new JLabel("Exit : ");
 		lblGoalNode.setForeground(Color.BLUE);
 		lblGoalNode.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		lblGoalNode.setBounds(10, 201, 114, 14);
+		lblGoalNode.setBounds(10, 201, 64, 14);
 		panel.add(lblGoalNode);
 
 		goalNodeCount = new JLabel("0");
-		goalNodeCount.setBounds(121, 202, 16, 14);
+		goalNodeCount.setBounds(69, 202, 25, 14);
 		panel.add(goalNodeCount);
 
 		lblNewLabel = new JLabel("Total Enemies");
@@ -229,9 +227,14 @@ public class GameRunner implements KeyListener {
 		nodesIExplored.setBounds(157, 223, 24, 14);
 		panel.add(nodesIExplored);
 		
-		lblMoves = new JLabel("Moves");
-		lblMoves.setBounds(150, 202, 41, 14);
+		lblMoves = new JLabel("Moves away");
+		lblMoves.setBounds(111, 202, 70, 14);
 		panel.add(lblMoves);
+		
+		JLabel lblZToView = new JLabel("Z to view the map");
+		lblZToView.setFont(new Font("Times New Roman", Font.BOLD, 13));
+		lblZToView.setBounds(10, 369, 114, 14);
+		panel.add(lblZToView);
 		panel.repaint();
 	}
 
@@ -242,15 +245,19 @@ public class GameRunner implements KeyListener {
 
 	private void spawnEnemies() throws InterruptedException {
 		for (int i = 0; i < nEnemies; i++) {
-			ex.execute(new Enemy(model, player, false));
+			ex.execute(new Enemy(model, player));
 		}
+		/*ex.execute(new Enemy(model, player, true));
+		ex.execute(new Enemy(model, player, true));
+		ex.execute(new Enemy(model, player, true));*/
+		
 	}
 
 	private void constantPathUpdate() {
 		goal = m.getGoalNode();
-		goal.setNodeType(NodeType.ExitPoint);
 		System.out.println(goal.getRow() + " : " + goal.getCol());
 		AStarTraversator update = new AStarTraversator(goal);
+		//BestFirstTraversator update = new BestFirstTraversator(goal);
 		System.out.println(model.length + " is model.");
 		System.out.println("Current row is: " + currentRow);
 		System.out.println("Current col is: " + currentCol);
@@ -269,8 +276,10 @@ public class GameRunner implements KeyListener {
 			goal.setNodeType(NodeType.WalkableNode);
 			goal = m.getGoalNode();
 			System.out.println("recalculating the path...");
-			AStarTraversator playerPath = new AStarTraversator(goal);
+			//BestFirstTraversator playerPath= new BestFirstTraversator(goal);
+			Traversator playerPath = new AStarTraversator(goal);
 			playerPath.traverse(model, model[player.getRow()][player.getCol()]);
+			
 			System.out.println("finished calculating...");
 			checker = (int) TraversatorStats.depth;
 			if (checker > 20) {
@@ -279,8 +288,8 @@ public class GameRunner implements KeyListener {
 		}
 	}
 
-	private void updateGUI(AStarTraversator playerPath) {
-		goalNodeCount.setText(String.valueOf((int) TraversatorStats.depth));
+	private void updateGUI(Traversator playerPath) {
+		goalNodeCount.setText(String.valueOf((int) TraversatorStats.depth-1));
 		lblHydrogenBomb.setText(String.valueOf(playerStuffs.getHyDrogenCount()));
 		lblBomb.setText(String.valueOf(playerStuffs.getBombCount()));
 		lblSword.setText(String.valueOf(playerStuffs.getSwordCount()));
@@ -342,11 +351,15 @@ public class GameRunner implements KeyListener {
 		updateView();
 	}
 
-	public boolean fight(Player player, Enemy opponent) {
+	public void fight(Player player, Enemy opponent) {
 		FuzzyLogic f = new FuzzyLogic();
 
 		labelFuzzy.setText(String.valueOf(f.fight(player.randomlyPickedWeapon(), player, opponent)));
-		return false;
+		this.nEnemies--;
+		if (player.myLifeForce() <= 0) {
+			MessageBox.info("Sorry you died :(,game will be closed now.", "Fuzzy Logic");
+			System.exit(0); // exit the game...
+		}
 	}
 
 	@Override
@@ -377,6 +390,7 @@ public class GameRunner implements KeyListener {
 			}
 			if (model[r][c].getNodeType() == NodeType.EnemyNode) {
 				model[r][c].setNodeType(NodeType.WalkableNode);
+				
 			}
 
 			model[r][c].setNodeType(NodeType.PlayerNode);
