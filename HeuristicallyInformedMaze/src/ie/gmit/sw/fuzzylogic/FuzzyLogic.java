@@ -1,3 +1,7 @@
+/*
+ * Arjun Kharel - G00298984 - Artificial Intelligence
+ */
+
 package ie.gmit.sw.fuzzylogic;
 
 import ie.gmit.sw.game.Enemy;

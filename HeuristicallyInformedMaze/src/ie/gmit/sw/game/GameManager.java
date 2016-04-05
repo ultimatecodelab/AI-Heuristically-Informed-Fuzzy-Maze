@@ -74,7 +74,7 @@ public class GameManager implements KeyListener {
 		view.setMinimumSize(d);
 		view.setMaximumSize(d);
 
-		JFrame f = new JFrame("GMIT - B.Sc. in Computing (Software Development)");
+		JFrame f = new JFrame("GMIT - B.Sc. in Computing (Software Development) - Arjun Kharel (G00298984)");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.addKeyListener(this);
 		f.getContentPane().setLayout(null);
