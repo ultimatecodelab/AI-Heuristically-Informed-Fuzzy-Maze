@@ -35,7 +35,6 @@ Clone the project using the above url
 import the project (HeuristicallyInformedMaze) in eclipse, please ensure the fuzzy logic library  is added in the build path.
 
 ##packages
-Packages:
 
 ie.gmit.sw.fuzzylogic (contains fuzzy logic)
 
