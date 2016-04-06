@@ -33,7 +33,7 @@ z to zoom out ( please move the player while you are zoomed out, you will be abl
 
 1: Clone the project from the above link
 
-2: Unzip MazeGame.zip
+2: Unzip **MazeGame.zip**
 
     - resources folder (contains resources)
     - mazegame.jar
