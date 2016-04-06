@@ -38,7 +38,10 @@ z to zoom out ( please move the player while you are zoomed out, you will be abl
     - resources folder (contains resources)
     - mazegame.jar
     
-execute **java -cp "./mazegame.jar;lib/*" ie.gmit.sw.game.GameRunner**
+execute **java -cp "./mazegame.jar;lib/*" ie.gmit.sw.game.GameRunner (windows)**
+
+execute **java -cp "./mazegame.jar:lib/*" ie.gmit.sw.game.GameRunner (linux)**
+
 
 
 You can also import the project to eclipse and run it.
