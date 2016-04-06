@@ -29,7 +29,6 @@ Right Arrow
 z to zoom out ( please move the player while you are zoomed out, you will be able to see the path being dynamically generated as you move through the maze.
 
 ###How to run ?
-**Please ensure that the fuzzylogic (jar file) has been added to your class path**.
 
 1: Clone the project from the above link
 
@@ -37,6 +36,8 @@ z to zoom out ( please move the player while you are zoomed out, you will be abl
 
     - resources folder (contains resources)
     - mazegame.jar
+    - fcl
+    - lib (jFuzzyLogic.jar)
     
 execute **java -cp "./mazegame.jar;lib/*" ie.gmit.sw.game.GameRunner (windows)**
 
