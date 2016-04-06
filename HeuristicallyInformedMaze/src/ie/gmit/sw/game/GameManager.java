@@ -263,7 +263,6 @@ public class GameManager implements KeyListener {
 
 	private void constantPathUpdate() {
 		goal = m.getGoalNode();
-		System.out.println("Goal node at: " + goal.getRow() + " : " + goal.getCol());
 		AStarTraversator update = new AStarTraversator(goal);
 		update.traverse(model, model[currentRow][currentCol]);
 		updateGUI(update);

@@ -108,7 +108,6 @@ public class Maze {
 			 currentCol = (int) ((MAZE_DIMENSION-20) * Math.random());
 		}
 		maze[currentRow][currentCol].setNodeType(NodeType.PlayerNode);
-		System.out.println("player at: " + currentRow + " Col : " + currentCol);
 		player = maze[currentRow][currentCol];
 	}
 	//returning goal node

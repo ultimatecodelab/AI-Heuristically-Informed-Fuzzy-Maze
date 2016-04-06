@@ -22,8 +22,7 @@ public class AStarTraversator implements Traversator {
 
 	public void traverse(Node[][] maze, Node node) {
 		setParentsNull(maze);
-		System.out.println("Target Node is: " + targetNode);
-
+	
 		long time = System.currentTimeMillis();
 		int visitCount = 0;
 
