@@ -29,6 +29,8 @@ Right Arrow
 z to zoom out ( please move the player while you are zoomed out, you will be able to see the path being dynamically generated as you move through the maze.
 
 ###How to run ?
+**Please ensure that the fuzzylogic (jar file) has been added to your class path**.
+
 1: Clone the project from the above link
 
 2: Unzip MazeGame.zip
