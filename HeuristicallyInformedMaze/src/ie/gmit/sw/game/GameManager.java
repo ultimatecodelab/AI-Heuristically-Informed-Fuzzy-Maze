@@ -60,6 +60,7 @@ public class GameManager implements KeyListener {
 	JLabel lblPlayerAstar;
 	JLabel lblEnemiesdepthLimiteddfs;
 	private JLabel lblMoves;
+	private JLabel lblFuzzylogicjar;
 
 	public GameManager() throws Exception {
 
@@ -100,7 +101,7 @@ public class GameManager implements KeyListener {
 	private void guiElementsInit(JFrame f) {
 		panel = new JPanel();
 		panel.setForeground(Color.GRAY);
-		panel.setBounds(0, 5, 191, 531);
+		panel.setBounds(0, 5, 191, 638);
 		f.getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -213,7 +214,7 @@ public class GameManager implements KeyListener {
 		lblFuzzyLogicVictory.setBounds(10, 479, 150, 14);
 		panel.add(lblFuzzyLogicVictory);
 
-		labelFuzzy = new JLabel("No enemy encountered ");
+		labelFuzzy = new JLabel("No enemy collided ");
 		labelFuzzy.setBounds(10, 504, 171, 14);
 		panel.add(labelFuzzy);
 
@@ -235,6 +236,17 @@ public class GameManager implements KeyListener {
 		lblZToView.setFont(new Font("Times New Roman", Font.BOLD, 13));
 		lblZToView.setBounds(10, 369, 114, 14);
 		panel.add(lblZToView);
+		
+		JLabel lblNewLabel_1 = new JLabel("External Dependency");
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		lblNewLabel_1.setForeground(Color.RED);
+		lblNewLabel_1.setBounds(10, 545, 171, 14);
+		panel.add(lblNewLabel_1);
+		
+		lblFuzzylogicjar = new JLabel("Fuzzy logic library");
+		lblFuzzylogicjar.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblFuzzylogicjar.setBounds(10, 570, 150, 14);
+		panel.add(lblFuzzylogicjar);
 		panel.repaint();
 	}
 
@@ -363,7 +375,7 @@ public class GameManager implements KeyListener {
 		if (r <= model.length - 1 && c <= model[r].length - 1 && (model[r][c].getNodeType() == NodeType.WalkableNode)
 				|| model[r][c].getNodeType() == NodeType.PathNode || model[r][c].getNodeType() == NodeType.BombNode
 				|| model[r][c].getNodeType() == NodeType.HydrogenBombNode
-				
+				|| model[r][c].getNodeType() == NodeType.SwordNode
 				|| model[r][c].getNodeType() == NodeType.ExitPoint) {
 
 			if (model[r][c].getNodeType() != NodeType.WalkableNode) {
@@ -394,6 +406,4 @@ public class GameManager implements KeyListener {
 			return false; // Can't move
 		}
 	}
-
-	
 }

@@ -17,8 +17,15 @@ import net.sourceforge.jFuzzyLogic.plot.JFuzzyChart;
 public class FuzzyLogic {
 
 	public double fight(Weapon weapon, Player me, Enemy opponent) {
-		String fileName = "flc/strengths.fcl";
-		FIS fis = FIS.load(fileName, true);
+		String fileName = null;
+		FIS fis = null;
+		try {
+			fileName = "flc/strengths.fcl";
+			fis = FIS.load(fileName, true);
+		} catch (Exception e) {
+			System.out.println("Fuzzy logic fcl not found.. Please make sure fuzzylogic jar file"
+					+ "is added in your classpath...");
+		}
 
 		if (fis == null) {
 			System.err.println("Can't load file: '" + fileName + "'");
